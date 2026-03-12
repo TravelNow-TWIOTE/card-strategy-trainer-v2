@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Card Strategy Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Card Strategy Trainer</h1>
+
+<div id="points">Points: 1000</div>
+
+Bet:
+<input id="bet" type="number" value="100">
+
+<button onclick="start()">Start Round</button>
+<button onclick="add()">Add 1000 Points</button>
+
+<hr>
+
+<h2>Dealer</h2>
+<div id="dealer" class="cards"></div>
+<div id="dealerTotal"></div>
+
+<h2>Your Hand</h2>
+
+<div id="hand1" class="cards"></div>
+<div id="total1"></div>
+
+<div id="hand2" class="cards"></div>
+<div id="total2"></div>
+
+<hr>
+
+<button onclick="hit()">Hit</button>
+<button onclick="stand()">Stand</button>
+<button onclick="doublePlay()">Double</button>
+<button onclick="split()">Split</button>
+
+<h3 id="msg"></h3>
+
+<script src="game.js"></script>
+
+</body>
+
+</html>
