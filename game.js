@@ -1,5 +1,11 @@
+let startingPoints = 1000
+
 let points = 1000
 let wager = 0
+
+let rounds = 0
+let wins = 0
+let losses = 0
 
 let deck = []
 let dealer = []
@@ -10,7 +16,14 @@ let activeHand = 0
 let active = false
 
 function update(){
+
 document.getElementById("points").innerText = "Points: " + points
+
+document.getElementById("rounds").innerText = rounds
+document.getElementById("wins").innerText = wins
+document.getElementById("losses").innerText = losses
+document.getElementById("profit").innerText = points-startingPoints
+
 }
 
 function deckBuild(){
@@ -67,31 +80,34 @@ return deck.pop()
 
 function render(){
 
-let dealerHTML=""
+renderDealer()
+renderHands()
+update()
+
+}
+
+function renderDealer(){
+
+let html=""
 
 if(active){
 
-dealerHTML+="<img src='https://deckofcardsapi.com/static/img/back.png'>"
-dealerHTML+="<img src='"+cardImage(dealer[1])+"'>"
+html+="<img src='https://deckofcardsapi.com/static/img/back.png'>"
+html+="<img src='"+cardImage(dealer[1])+"'>"
 
 document.getElementById("dealerTotal").innerText="Total: ?"
 
-}
-else{
+}else{
 
 for(let c of dealer){
-dealerHTML+="<img src='"+cardImage(c)+"'>"
+html+="<img class='flip' src='"+cardImage(c)+"'>"
 }
 
 document.getElementById("dealerTotal").innerText="Total: "+total(dealer)
 
 }
 
-document.getElementById("dealer").innerHTML=dealerHTML
-
-renderHands()
-
-update()
+document.getElementById("dealer").innerHTML=html
 
 }
 
@@ -135,12 +151,12 @@ return
 deckBuild()
 
 dealer=[draw(),draw()]
-
 hands=[[draw(),draw()]]
 
 activeHand=0
-
 active=true
+
+rounds++
 
 render()
 
@@ -164,8 +180,7 @@ function nextHand(){
 
 if(activeHand<hands.length-1){
 activeHand++
-}
-else{
+}else{
 stand()
 }
 
@@ -184,7 +199,6 @@ finish()
 function doublePlay(){
 
 hands[activeHand].push(draw())
-
 nextHand()
 
 render()
@@ -225,18 +239,23 @@ let p=total(h)
 
 if(p>21){
 points-=wager
+losses++
 }
 else if(dealerTotal>21||p>dealerTotal){
 points+=wager
+wins++
 }
 else if(p<dealerTotal){
 points-=wager
+losses++
+}
+else{
+wins++
 }
 
 }
 
 render()
-
 update()
 
 }
