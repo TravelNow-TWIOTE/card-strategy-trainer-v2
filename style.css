@@ -8,6 +8,7 @@ margin:0;
 
 .cards{
 margin:15px;
+min-height:120px;
 }
 
 .cards img{
@@ -15,12 +16,12 @@ width:90px;
 margin:5px;
 border-radius:8px;
 box-shadow:0 6px 12px rgba(0,0,0,0.5);
-animation: deal 0.4s ease;
+animation:deal 0.35s ease;
 }
 
 @keyframes deal{
 from{
-transform:translateY(-50px);
+transform:translateY(-40px);
 opacity:0;
 }
 to{
@@ -29,14 +30,9 @@ opacity:1;
 }
 }
 
-.flip{
-animation:flip 0.5s ease;
-}
-
-@keyframes flip{
-0%{transform:rotateY(0)}
-50%{transform:rotateY(90deg)}
-100%{transform:rotateY(0)}
+.active-hand{
+outline:4px solid gold;
+border-radius:10px;
 }
 
 button{
@@ -58,6 +54,19 @@ background:#259a4f;
 font-size:20px;
 font-weight:bold;
 margin-top:15px;
+position:relative;
+}
+
+.float{
+animation:floatUp 1s ease;
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+}
+
+@keyframes floatUp{
+0%{top:0;opacity:1}
+100%{top:-40px;opacity:0}
 }
 
 #stats{
